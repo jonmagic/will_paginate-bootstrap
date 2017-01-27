@@ -28,18 +28,18 @@ module BootstrapPagination
 
     def page_number(page)
       if page == current_page
-        tag("li", tag("span", page), class: "active page-item")
+        tag("li", link([page, tag("span", "(current)", "aria-hidden": "true")], "#", class: "page-link"), class: "active page-item")
       else
         tag("li", link(page, page, link_options.merge(rel: rel_value(page))), class: "page-item")
       end
     end
 
     def previous_or_next_page(page, text, arrow, classname)
-      inner_spans = [tag("span", arrow, "aria-hidden" => "true"), tag("span", text, class: "sr-only")]
+      inner_spans = [tag("span", arrow, "aria-hidden": "true"), tag("span", text, class: "sr-only")]
       if page
-        tag("li", link(inner_spans, page, link_options.merge("aria-label" => text)), class: classname)
+        tag("li", link(inner_spans, page, link_options.merge("aria-label": text)), class: classname)
       else
-        tag("li", tag("span", inner_spans, class: "page-link"), class: "%s disabled page-item" % classname)
+        tag("li", link(inner_spans, "#", class: "page-link", "tabindex": "-1"), class: "%s disabled page-item" % classname)
       end
     end
 
