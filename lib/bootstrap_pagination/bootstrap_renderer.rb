@@ -17,7 +17,7 @@ module BootstrapPagination
         end
       end.join(@options[:link_separator])
 
-      tag("ul", list_items, class: ul_class)
+      tag("nav", tag("ul", list_items, class: ul_class), "aria-label": nav_aria_label)
     end
 
     def container_attributes
@@ -63,6 +63,10 @@ module BootstrapPagination
 
     def link_options
       (@options[:link_options] || {}).merge({class: "page-link"})
+    end
+
+    def nav_aria_label
+      @options[:nav_aria_label] || "Page navigation"
     end
   end
 end
