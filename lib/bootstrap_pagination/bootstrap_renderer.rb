@@ -58,7 +58,7 @@ module BootstrapPagination
     end
 
     def ul_class
-      ["pagination", @options[:class]].compact.join(" ")
+      ["pagination", @options[:class]].compact.uniq.join(" ")
     end
 
     def link_options
