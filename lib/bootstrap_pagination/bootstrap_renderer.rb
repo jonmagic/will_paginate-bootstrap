@@ -4,8 +4,6 @@ module BootstrapPagination
   # Contains functionality shared by all renderer classes.
   module BootstrapRenderer
     ELLIPSIS = "&hellip;"
-    LEFT_ARROW = "&laquo;"
-    RIGHT_ARROW = "&raquo;"
 
     def to_html
       list_items = pagination.map do |item|
@@ -34,8 +32,8 @@ module BootstrapPagination
       end
     end
 
-    def previous_or_next_page(page, text, arrow, classname)
-      inner_spans = [tag("span", arrow, "aria-hidden": "true"), tag("span", text, class: "sr-only")]
+    def previous_or_next_page(page, text, classname, aria_text)
+      inner_spans = [tag("span", text, "aria-hidden": "true"), tag("span", aria_text, class: "sr-only")]
       if page
         tag("li", link(inner_spans, page, link_options.merge("aria-label": text)), class: classname)
       else
@@ -49,12 +47,12 @@ module BootstrapPagination
 
     def previous_page
       num = @collection.current_page > 1 && @collection.current_page - 1
-      previous_or_next_page(num, @options[:previous_label], LEFT_ARROW, "prev")
+      previous_or_next_page(num, @options[:previous_label], "prev", "Previous")
     end
 
     def next_page
       num = @collection.current_page < @collection.total_pages && @collection.current_page + 1
-      previous_or_next_page(num, @options[:next_label], RIGHT_ARROW, "next")
+      previous_or_next_page(num, @options[:next_label], "next", "Next")
     end
 
     def ul_class
