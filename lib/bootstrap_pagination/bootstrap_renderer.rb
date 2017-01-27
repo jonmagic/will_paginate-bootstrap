@@ -39,7 +39,7 @@ module BootstrapPagination
       if page
         tag("li", link(inner_spans, page, link_options.merge("aria-label" => text)), class: classname)
       else
-        tag("li", tag("span", inner_spans), class: "%s disabled page-item" % classname)
+        tag("li", tag("span", inner_spans, class: "page-link"), class: "%s disabled page-item" % classname)
       end
     end
 
